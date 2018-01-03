@@ -1,12 +1,11 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
+import { Router, Route, Switch, Redirect } from 'dva/router';
 
 // import IndexPage from './routes/IndexPage';
 import MainLayout from "./routes/MainLayout.js";
 import Login from "./routes/Login.js";
 import NotFound from "./routes/NotFound.js";
 import DashBoard from "./routes/DashBoard.js";
-
 import List from "./routes/List.js";
 
 function RouterConfig({ history }) {
@@ -14,6 +13,7 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/404" component={NotFound} />
         <Route
           path="/"
           render={() => (
@@ -21,12 +21,11 @@ function RouterConfig({ history }) {
               <Switch>
                 <Route path="/dashboard" component={DashBoard} />
                 <Route path="/list" component={List} />
-                {/* <Redirect to="/notfound"/> */}
+                <Redirect to="/404" />
               </Switch>
             </MainLayout>
           )}
         />
-        <Route component={NotFound} />
       </Switch>
     </Router>
   );
