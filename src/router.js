@@ -13,19 +13,21 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/404" component={NotFound} />
         <Route
-          path="/"
+          path="/main"
+          strict
           render={() => (
             <MainLayout>
               <Switch>
-                <Route path="/dashboard" component={DashBoard} />
-                <Route path="/list" component={List} />
-                <Redirect to="/404" />
+                {/* <Route path="/" exact component={DashBoard} /> */}
+                <Route path="/main/dashboard" exact component={DashBoard} />
+                <Route path="/main/list" component={List} />
+                <Route component={NotFound} />
               </Switch>
             </MainLayout>
           )}
         />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );
