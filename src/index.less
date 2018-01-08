@@ -1,0 +1,22 @@
+html, body, :global(#root) {
+  height: 100%;
+}
+// body {
+//   margin: 0;
+// }
+
+.flex {
+  display: flex;
+  .flex1{
+    flex: 1
+  }
+  &.column {
+    flex-direction: column;
+  }
+  &.jc-center {
+    justify-content: center;
+  }
+  &.ai-center {
+    align-items: center;
+  }
+}
