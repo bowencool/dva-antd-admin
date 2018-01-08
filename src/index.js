@@ -1,8 +1,13 @@
 import dva from 'dva';
+import { message } from 'antd';
 import './index.less';
 
 // 1. Initialize
-const app = dva();
+const app = dva({
+  onError(err) {
+    message.error(err.message)
+  }
+});
 
 app.model(require("./models/login"));
 

@@ -1,6 +1,5 @@
 import { login } from '../services/login';
 
-
 export default {
   namespace: 'login',
   state: {
@@ -15,7 +14,7 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const res = yield call(login, payload)
-      yield put({ type: 'save', payload: res.data.data })
+      yield put({ type: 'save', payload: res })
     }
   },
 };
