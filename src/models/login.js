@@ -22,7 +22,7 @@ export default {
       yield put({ type: 'save', payload: res })
       Cookies.set('role', res.role)
       Cookies.set('token', res.token)
-      yield put(routerRedux.push('/main/dashboard'))
+      yield put(routerRedux.push('/dashboard'))
     },
     *logout(action, { put }) {
       Cookies.remove('role')

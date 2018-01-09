@@ -1,9 +1,11 @@
 import dva from 'dva';
+import createHistory from 'history/createBrowserHistory'
 import { message } from 'antd';
 import './index.less';
 
-// 1. Initialize
+// Initialize
 const app = dva({
+  history: createHistory(),
   onError(err) {
     message.error(err.message)
   }
@@ -11,8 +13,8 @@ const app = dva({
 
 app.model(require("./models/login"));
 
-// 4. Router
+// Router
 app.router(require('./router'));
 
-// 5. Start
+// Start
 app.start('#root');
