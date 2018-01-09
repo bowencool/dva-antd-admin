@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import { routerRedux, Link } from 'dva/router';
 import { Layout, Menu, Icon } from 'antd';
 import './MainLayout.less';
 
@@ -9,16 +9,20 @@ const { Header, Footer, Sider, Content } = Layout
 class MainLayout extends React.Component {
   state = {
     collapsed: false,
+    mode: 'inline',
+    theme: 'dark',
   };
   componentWillMount() {
     const { login, dispatch } = this.props
     if (!login.token) {
       dispatch(routerRedux.push('/login'))
     }
+    console.log(this.state.match);
   }
-  toggle = () => {
+  toggleCollapse = () => {
     this.setState({
       collapsed: !this.state.collapsed,
+      mode: this.state.collapsed ? 'inline' : 'vertical'
     });
   }
   render() {
@@ -31,22 +35,24 @@ class MainLayout extends React.Component {
           collapsed={this.state.collapsed}
         >
           <div className="logo" />
-          <Menu theme="dark">
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>dashboard</span>
+          {/* todo defaultSelectedKeys/defaultOpenKeys */}
+          <Menu theme={this.state.theme} mode={this.state.mode}>
+            <Menu.Item key="dashboard">
+              <Link to="dashboard"><Icon type="user" /><span>Dashboard</span></Link>
             </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="team" />
-              <span>list</span>
-            </Menu.Item>
+            <Menu.SubMenu key="2" title={<span><Icon type="team" /><span>Some Title</span></span>}>
+              <Menu.Item key="2.1">
+                <Link to="list"><Icon type="team" />Some List</Link>
+              </Menu.Item>
+            </Menu.SubMenu>
           </Menu>
         </Sider>
         <Layout>
           <Header>
+            {/* todo 旋转 */}
             <Icon
               type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-              onClick={this.toggle}
+              onClick={this.toggleCollapse}
             />
             <Icon
               className="fr"
