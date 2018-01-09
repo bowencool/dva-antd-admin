@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import { BASE_API, API_PREFIX } from './constant';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -30,7 +31,10 @@ export default function request(url, options) {
   /**
    * Do something before send.
    */
-  return fetch(url, options)
+  return fetch(BASE_API + API_PREFIX + url, {
+    headers: { 'Content-type': 'application/json' },
+    ...options,
+  })
     .then(checkStatus)
     .then(response => response.json())
     .then(responseInterceptor)

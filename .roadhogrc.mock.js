@@ -1,4 +1,8 @@
+import fs from 'fs';
+import path from 'path';
 
-export default {
-  'POST /api/login': { code: 1, data: { role: 'admin', token: 'syoi1pocjy12adsof2389k' } }
-};
+const mock = {}
+fs.readdirSync(path.join(__dirname + '/mock')).forEach(function (file) {
+  Object.assign(mock, require('./mock/' + file))
+})
+export default mock
