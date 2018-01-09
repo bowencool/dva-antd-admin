@@ -1,24 +1,27 @@
 import React from 'react';
 // import { Router, Route, Switch } from 'dva/router';
 import { Router, Route, Switch, Redirect } from 'dva/router';
+// import { routerRedux, Route, Switch, Redirect } from 'dva/router';
 
-// import IndexPage from './routes/IndexPage';
 import MainLayout from "./routes/MainLayout.js";
 import Login from "./routes/Login.js";
 import NotFound from "./routes/NotFound.js";
 import DashBoard from "./routes/DashBoard.js";
 import List from "./routes/List.js";
 
+// const { ConnectedRouter } = routerRedux
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
+        {/* todo 移除'/main' */}
         <Route
           path="/main"
           strict
           render={() => (
-            <MainLayout>
+            <MainLayout history={history}>
               <Switch>
+                {/* todo ProtectedRoute */}
                 <Route exact path="/main/dashboard" component={DashBoard} />
                 <Route exact path="/main/list" component={List} />
                 <Route component={NotFound} />

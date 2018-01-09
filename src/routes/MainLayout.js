@@ -17,7 +17,6 @@ class MainLayout extends React.Component {
     if (!login.token) {
       dispatch(routerRedux.push('/login'))
     }
-    console.log(this.state.match);
   }
   toggleCollapse = () => {
     this.setState({
@@ -26,7 +25,9 @@ class MainLayout extends React.Component {
     });
   }
   render() {
-    const { children, dispatch } = this.props
+    const { children, dispatch, history } = this.props
+    const currentPathNames = history.location.pathname.split('/').slice(2)
+    // console.log(currentPathNames);
     return (
       <Layout id="main-layout">
         <Sider
@@ -35,13 +36,13 @@ class MainLayout extends React.Component {
           collapsed={this.state.collapsed}
         >
           <div className="logo" />
-          {/* todo defaultSelectedKeys/defaultOpenKeys */}
-          <Menu theme={this.state.theme} mode={this.state.mode}>
+          {/* todo 面包屑&多级嵌套 */}
+          <Menu theme={this.state.theme} mode={this.state.mode} selectedKeys={currentPathNames}>
             <Menu.Item key="dashboard">
               <Link to="dashboard"><Icon type="user" /><span>Dashboard</span></Link>
             </Menu.Item>
-            <Menu.SubMenu key="2" title={<span><Icon type="team" /><span>Some Title</span></span>}>
-              <Menu.Item key="2.1">
+            <Menu.SubMenu key="list" title={<span><Icon type="team" /><span>Some Title</span></span>}>
+              <Menu.Item key="list">
                 <Link to="list"><Icon type="team" />Some List</Link>
               </Menu.Item>
             </Menu.SubMenu>
