@@ -1,18 +1,23 @@
 import React from 'react';
 import { connect } from 'dva';
-import styles from './MainLayout.css';
+import { routerRedux } from 'dva/router';
+// import styles from './MainLayout.css';
 
-function MainLayout({ children }) {
+function MainLayout({ children, login, dispatch }) {
+  if (!login.token) {
+    dispatch(routerRedux.push('/login'))
+  }
   return (
-    <div className={styles.normal}>
+    <div>
       Route Component: MainLayout
+      <button onClick={() => dispatch({ type: 'login/logout' })}>log out</button>
       <div style={{ background: '#ccc' }}>{children}</div>
     </div>
   );
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps({ login }) {
+  return { login };
 }
 
 export default connect(mapStateToProps)(MainLayout);

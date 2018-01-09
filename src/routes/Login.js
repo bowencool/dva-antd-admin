@@ -1,10 +1,16 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button } from 'antd';
+import { routerRedux } from 'dva/router';
 // import styles from './Login.css';
 
 const FormItem = Form.Item
 class Login extends React.Component {
+  componentDidMount() {
+    if (this.props.login.token) {
+      this.props.dispatch(routerRedux.push('/main/dashboard'))
+    }
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -48,13 +54,8 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  // console.log(wtf);
-  return {};
+function mapStateToProps({ login }) {
+  return { login };
 }
-// function mapStateToProps({ login }) {
-//   console.log(login);
-//   return { login };
-// }
 
 export default connect(mapStateToProps)(Form.create()(Login));
