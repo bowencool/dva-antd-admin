@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button } from 'antd';
 import { routerRedux } from 'dva/router';
-// import styles from './Login.css';
 
 const FormItem = Form.Item
 class Login extends React.Component {

@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'dva';
-import styles from './DashBoard.css';
 
 function DashBoard() {
   return (
-    <div className={styles.normal}>
+    <div>
       Route Component: DashBoard
     </div>
   );

@@ -1,15 +1,7 @@
 import React from 'react';
-// import { Router, Route, Switch } from 'dva/router';
 import { Router, Route, Switch, Redirect } from 'dva/router';
-// import { routerRedux, Route, Switch, Redirect } from 'dva/router';
+import { Login, MainLayout, DashBoard, List, NotFound } from "./routes";
 
-import MainLayout from "./routes/MainLayout.js";
-import Login from "./routes/Login.js";
-import NotFound from "./routes/NotFound.js";
-import DashBoard from "./routes/DashBoard.js";
-import List from "./routes/List.js";
-
-// const { ConnectedRouter } = routerRedux
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
@@ -24,7 +16,8 @@ function RouterConfig({ history }) {
                 {/* todo ProtectedRoute */}
                 <Route exact path="/main/dashboard" component={DashBoard} />
                 <Route exact path="/main/list" component={List} />
-                <Route component={NotFound} />
+                <Redirect to="/main/dashboard" />
+                {/* <Route component={NotFound} /> */}
               </Switch>
             </MainLayout>
           )}
