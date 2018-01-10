@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
-import { routerRedux, Link } from 'dva/router';
-import { Layout, Menu, Icon } from 'antd';
+import { routerRedux, withRouter } from 'dva/router';
+import { Layout, Icon } from 'antd';
+import { Menus } from '../permission'
 import './MainLayout.less';
 
 const { Header, Footer, Sider, Content } = Layout
@@ -25,9 +26,9 @@ class MainLayout extends React.Component {
     });
   }
   render() {
-    const { children, dispatch } = this.props
-    // const pathSnippets = history.location.pathname.split('/').slice(2)
-    // console.log(pathSnippets);
+    const { children, dispatch, location } = this.props
+    const pathSnippets = location.pathname.split('/').slice(1)
+    console.log(pathSnippets);
     return (
       <Layout id="main-layout">
         <Sider
@@ -36,17 +37,8 @@ class MainLayout extends React.Component {
           collapsed={this.state.collapsed}
         >
           <div className="logo" />
-          {/* todo 自动高亮&&面包屑&&多级嵌套 */}
-          <Menu theme={this.state.theme} mode={this.state.mode}>
-            <Menu.Item key="dashboard">
-              <Link to="dashboard"><Icon type="user" /><span>Dashboard</span></Link>
-            </Menu.Item>
-            <Menu.SubMenu key="list" title={<span><Icon type="team" /><span>Some Title</span></span>}>
-              <Menu.Item key="list">
-                <Link to="list"><Icon type="team" />Some List</Link>
-              </Menu.Item>
-            </Menu.SubMenu>
-          </Menu>
+          {/* todo 自动高亮(刷新,后退)&&面包屑 */}
+          <Menus theme={this.state.theme} mode={this.state.mode} />
         </Sider>
         <Layout>
           <Header>
@@ -73,4 +65,4 @@ function mapStateToProps({ login }) {
   return { login };
 }
 
-export default connect(mapStateToProps)(MainLayout);
+export default withRouter(connect(mapStateToProps)(MainLayout));
