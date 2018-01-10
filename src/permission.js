@@ -4,7 +4,7 @@ import { Menu, Icon } from 'antd';
 import { DashBoard, List, Nav21 } from "./routes";
 
 const { Item: MenuItem, SubMenu } = Menu
-
+// 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
 const routes = [
   {
     path: '/dashboard',
@@ -58,7 +58,6 @@ const route2Route = ({
   if (redirect) {
     return <Redirect key={index} from={path} to={redirect} />
   }
-  // console.log(parentRoutes[index].path + path);
   // todo 获取当前匹配的所有路由, 形如[{path:'/menu1'}, path:'/submenu1'] 以拼凑path或设置默认高亮
   return (subRoutes.length
     ? <Switch>
@@ -66,7 +65,6 @@ const route2Route = ({
     </Switch>
     : <Route key={index} path={path} {...rest} />)
 }
-
 
 const route2Menu = ({
   path,
@@ -91,6 +89,7 @@ const route2Menu = ({
       </MenuItem>
   )
 }
+
 function LayoutContentRoutes() {
   return (
     <Switch>
@@ -98,9 +97,10 @@ function LayoutContentRoutes() {
     </Switch>
   )
 }
-function Menus({ theme, mode }) {
+
+function Menus({ theme, mode, selectedKeys }) {
   return (
-    <Menu theme={theme} mode={mode}>
+    <Menu theme={theme} mode={mode} selectedKeys={selectedKeys}>
       {routes.map(route2Menu)}
     </Menu>
   )

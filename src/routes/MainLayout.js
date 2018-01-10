@@ -26,9 +26,9 @@ class MainLayout extends React.Component {
     });
   }
   render() {
-    const { children, dispatch, location } = this.props
-    const pathSnippets = location.pathname.split('/').slice(1)
-    console.log(pathSnippets);
+    const { children, dispatch, location: { pathname } } = this.props
+    // const pathSnippets = location.pathname.split('/').slice(1)
+    // console.log(pathSnippets);
     return (
       <Layout id="main-layout">
         <Sider
@@ -38,7 +38,7 @@ class MainLayout extends React.Component {
         >
           <div className="logo" />
           {/* todo 自动高亮(刷新,后退)&&面包屑 */}
-          <Menus theme={this.state.theme} mode={this.state.mode} />
+          <Menus theme={this.state.theme} mode={this.state.mode} selectedKeys={[pathname]} />
         </Sider>
         <Layout>
           <Header>
