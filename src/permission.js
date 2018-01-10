@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
-import { DashBoard, List, Nav21 } from "./routes";
+import { DashBoard, List, Nav21, Nav22 } from "./routes";
 
 const { Item: MenuItem, SubMenu } = Menu
 // 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
@@ -31,6 +31,11 @@ const routes = [
           {
             path: '/nav2/1',
             component: Nav21,
+            exact: true,
+          },
+          {
+            path: '/nav2/2',
+            component: Nav22,
             exact: true,
           },
         ],
@@ -79,7 +84,7 @@ const route2Menu = ({
   return (
     subRoutes.length ?
       <SubMenu
-        key={index * 10}
+        key={title + index}
         title={<span><Icon type={icon} /><span>{title}</span></span>}
       >
         {subRoutes.map(route2Menu)}
