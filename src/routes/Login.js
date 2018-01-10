@@ -5,9 +5,9 @@ import { routerRedux } from 'dva/router';
 
 const FormItem = Form.Item
 class Login extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.login.token) {
-      this.props.dispatch(routerRedux.push('/main/dashboard'))
+      this.props.dispatch(routerRedux.push('/dashboard'))
     }
   }
   handleSubmit = (e) => {
