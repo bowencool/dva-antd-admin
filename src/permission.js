@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
-import { DashBoard, List, Nav21, Nav22 } from "./routes";
+import { DashBoard, List, Nav21, Nav22, Protected } from "./routes";
 
 const { Item: MenuItem, SubMenu } = Menu
 // 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
@@ -43,6 +43,12 @@ const routes = [
     ],
   },
   {
+    path: '/protected',
+    title: 'WTF?',
+    // roles: ['admin'],
+    component: Protected,
+  },
+  {
     path: '/',
     exact: true,
     redirect: '/login',
@@ -61,14 +67,17 @@ const route2Route = ({
 },
   index) => {
   if (redirect) {
+    console.log(redirect);
     return <Redirect key={index} from={path} to={redirect} />
   }
-  // todo 获取当前匹配的所有路由, 形如[{path:'/menu1'}, path:'/submenu1'] 以拼凑path或设置默认高亮
-  return (subRoutes.length
-    ? <Switch>
+  // todo 获取当前匹配的所有路由, 形如[{ path: '/menu1' }, { path: '/submenu1' }] 以拼凑path/设置默认高亮/面包屑
+  // bug component不能显示, Switch/SubMenu生成重复?
+  return (subRoutes.length > 0
+    ? <Switch key={index}>
       {subRoutes.map(route2Route)}
     </Switch>
     : <Route key={index} path={path} {...rest} />)
+  // todo ProtectedRoute
 }
 
 const route2Menu = ({
@@ -90,6 +99,7 @@ const route2Menu = ({
         {subRoutes.map(route2Menu)}
       </SubMenu> :
       <MenuItem key={path}>
+        {/* todo key和props的key重复? */}
         <Link to={path}><Icon type={icon} /><span>{title}</span></Link>
       </MenuItem>
   )
