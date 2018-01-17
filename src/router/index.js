@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, Switch } from 'dva/router';
-import { LayoutContentRoutes } from './permission'
+import LayoutContentRoutes from './permission'
 
-import { Login, MainLayout, NotFound } from "./routes";
+import { Login, MainLayout, NotFound } from "../routes";
 
 function RouterConfig({ history }) {
   return (
@@ -11,10 +11,9 @@ function RouterConfig({ history }) {
         <Route exact path="/login" component={Login} />
         <Route exact path="/404" component={NotFound} />
         <Route
-          render={() => (
-            <MainLayout>
-              <LayoutContentRoutes />
-            </MainLayout>)}
+          render={() => (<MainLayout>
+            <LayoutContentRoutes />
+          </MainLayout>)}
         />
       </Switch>
     </Router>

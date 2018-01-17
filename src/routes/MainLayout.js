@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { routerRedux, withRouter } from 'dva/router';
 import { Layout, Icon } from 'antd';
-import { Menus } from '../permission'
+import { Menus } from '../router/permission'
 import './MainLayout.less';
 
 const { Header, Footer, Sider, Content } = Layout
