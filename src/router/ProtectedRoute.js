@@ -13,7 +13,7 @@ export const hasPermission = (userRoles, routeRoles) => {
 
 const ProtectedRoute = ({ userRoles, routeRoles, ...rest }) => {
   return (<div>
-    <p>当前用户权限: {JSON.stringify(userRoles)}</p>
+    <p>您的权限: {JSON.stringify(userRoles)} (admin拥有所有权限)</p>
     <p>路由访问权限: {JSON.stringify(routeRoles)}</p>
     {hasPermission(userRoles, routeRoles) ? <Route {...rest} /> : <NotAllowed />}
   </div>)

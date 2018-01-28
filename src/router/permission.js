@@ -2,19 +2,18 @@ import React from 'react';
 // import { connect } from 'dva';
 import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
-import { NotFound, DashBoard, List, Ordinary, Protected } from "../routes";
+import { NotFound, DashBoard, List, List2, Ordinary, Protected } from "../routes";
 import ProtectedRoute from './ProtectedRoute';
 
 const { Item: MenuItem, SubMenu } = Menu
-// 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
+// 仅用于生成菜单及相关路由, 不含Content内部嵌套
 const routesAndMenus = [
   {
-    path: '/dashboard',
-    title: '首页',
-    icon: 'dashboard',
-    component: DashBoard,
-    // exact: true,
-    strict: true,
+    path: '/dashboard', // 路由path, Redirect的from, 菜单key
+    title: '首页', // 菜单文本, 不填则不会生成菜单
+    icon: 'dashboard', // 菜单图标
+    component: DashBoard, // 路由component
+    strict: true, // 其他可以被无损转发到Route, Menu.Item的prop
   },
   {
     // path: '/menu1',
@@ -27,6 +26,17 @@ const routesAndMenus = [
         title: '路由嵌套示例',
         icon: 'bars',
         component: List,
+      },
+      {
+        path: '/list2',
+        title: '路由嵌套示例2',
+        icon: 'bars',
+        component: List2,
+        exact: true,
+      },
+      {
+        path: '/list2/:id(\\d+)',
+        render: ({ match }) => <div>detail: {match.params.id}</div>,
       },
       {
         path: '/nav2',
@@ -73,9 +83,9 @@ const routesAndMenus = [
     component: Protected,
   },
   {
-    path: '/',
+    path: '/', // Redirect的from
     exact: true,
-    redirect: '/dashboard',
+    redirect: '/dashboard', // Redirect
   },
   {
     component: NotFound,
@@ -118,7 +128,7 @@ const route2Menu = ({ path, redirect, subRoutes = [], title, icon = "question-ci
   return (
     subRoutes.length ?
       <SubMenu
-        key={title + index}
+        key={path + index}
         title={<span><Icon type={icon} /><span>{title}</span></span>}
       >
         {subRoutes.map(route2Menu)}
