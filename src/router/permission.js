@@ -1,8 +1,8 @@
 import React from 'react';
 // import { connect } from 'dva';
-import { Switch, Redirect, Link } from 'dva/router';
+import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
-import { DashBoard, List, Ordinary, Protected } from "../routes";
+import { NotFound, DashBoard, List, Ordinary, Protected } from "../routes";
 import ProtectedRoute from './ProtectedRoute';
 
 const { Item: MenuItem, SubMenu } = Menu
@@ -24,15 +24,14 @@ const routesAndMenus = [
     subRoutes: [
       {
         path: '/list',
-        title: '列表示例',
+        title: '路由嵌套示例',
         icon: 'bars',
         component: List,
-        exact: true,
       },
       {
         path: '/nav2',
         components: Protected,
-        title: '递归嵌套',
+        title: '递归嵌套(菜单)',
         icon: 'switcher',
         subRoutes: [
           {
@@ -42,7 +41,7 @@ const routesAndMenus = [
             exact: true,
           },
           {
-            path: '/nav2protected',
+            path: '/devpm',
             component: Protected,
             roles: ['dev', 'pm'],
             icon: 'lock',
@@ -79,20 +78,21 @@ const routesAndMenus = [
     redirect: '/dashboard',
   },
   {
-    path: '*',
-    redirect: '/404',
+    component: NotFound,
   }
 ]
 
 function LayoutContentRoutes() {
   const routes = []
-  const handleRoute = ({ redirect, path, subRoutes = [], ...rest }, index) => {
+  const handleRoute = ({ redirect, path, subRoutes = [], roles, ...rest }, index) => {
     if (redirect) {
       routes.push(<Redirect key={path + index} from={path} to={redirect} {...rest} />)
       return
     }
     if (subRoutes.length === 0) {
-      routes.push(<ProtectedRoute key={path + index} path={path} {...rest} />)
+      routes.push(roles ?
+        <ProtectedRoute key={path + index} path={path} routeRoles={roles} {...rest} /> :
+        <Route key={path + index} path={path} {...rest} />)
       return
     }
     subRoutes.forEach(handleRoute)
@@ -111,8 +111,8 @@ function LayoutContentRoutes() {
 // export default connect(({ login }) => ({ login }))(LayoutContentRoutes)
 export default LayoutContentRoutes
 
-const route2Menu = ({ path, redirect, subRoutes = [], title = "Some Title", icon = "question-circle-o" }, index) => {
-  if (redirect) {
+const route2Menu = ({ path, redirect, subRoutes = [], title, icon = "question-circle-o" }, index) => {
+  if (redirect || !title) {
     return null
   }
   return (
