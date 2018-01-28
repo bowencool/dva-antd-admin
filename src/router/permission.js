@@ -2,7 +2,7 @@ import React from 'react';
 // import { connect } from 'dva';
 import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
-import { DashBoard, List, Nav21, Nav22, Protected } from "../routes";
+import { DashBoard, List, Ordinary, Protected } from "../routes";
 
 const { Item: MenuItem, SubMenu } = Menu
 // 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
@@ -19,10 +19,12 @@ const routesAndMenus = [
     // path: '/menu1',
     // component: Protected,
     title: '主菜单1',
+    icon: 'appstore-o',
     subRoutes: [
       {
         path: '/list',
         title: '列表示例',
+        icon: 'bars',
         component: List,
         exact: true,
       },
@@ -30,10 +32,11 @@ const routesAndMenus = [
         path: '/nav2',
         components: Protected,
         title: '递归嵌套',
+        icon: 'switcher',
         subRoutes: [
           {
             path: '/nav21',
-            component: Nav21,
+            component: Ordinary,
             title: 'nav21',
             exact: true,
           },
@@ -41,12 +44,13 @@ const routesAndMenus = [
             path: '/nav2protected',
             component: Protected,
             roles: ['admin'],
+            icon: 'lock',
             title: '需要权限',
             exact: true,
           },
           {
             path: '/nav22',
-            component: Nav22,
+            component: Ordinary,
             title: 'nav22',
             exact: true,
           },
@@ -57,6 +61,7 @@ const routesAndMenus = [
   {
     path: '/protected',
     title: '权限测试',
+    icon: 'lock',
     roles: ['admin'],
     component: Protected,
   },
