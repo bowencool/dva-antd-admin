@@ -1,8 +1,9 @@
 import React from 'react';
 // import { connect } from 'dva';
-import { Route, Switch, Redirect, Link } from 'dva/router';
+import { Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
 import { DashBoard, List, Ordinary, Protected } from "../routes";
+import ProtectedRoute from './ProtectedRoute';
 
 const { Item: MenuItem, SubMenu } = Menu
 // 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
@@ -43,9 +44,9 @@ const routesAndMenus = [
           {
             path: '/nav2protected',
             component: Protected,
-            roles: ['admin'],
+            roles: ['dev', 'pm'],
             icon: 'lock',
-            title: '需要权限',
+            title: '权限dev,pm',
             exact: true,
           },
           {
@@ -59,10 +60,17 @@ const routesAndMenus = [
     ],
   },
   {
-    path: '/protected',
-    title: '权限测试',
+    path: '/dev',
+    title: '权限dev',
     icon: 'lock',
-    roles: ['admin'],
+    roles: ['dev'],
+    component: Protected,
+  },
+  {
+    path: '/qaui',
+    title: '权限qa,ui',
+    icon: 'lock',
+    roles: ['qa', 'ui'],
     component: Protected,
   },
   {
@@ -84,7 +92,7 @@ function LayoutContentRoutes() {
       return
     }
     if (subRoutes.length === 0) {
-      routes.push(<Route key={path + index} path={path} {...rest} />)
+      routes.push(<ProtectedRoute key={path + index} path={path} {...rest} />)
       return
     }
     subRoutes.forEach(handleRoute)

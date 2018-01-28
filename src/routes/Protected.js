@@ -3,7 +3,7 @@ import React from 'react';
 function Protected() {
   return (
     <div>
-      Route Component: Protected !
+      已通过权限验证
     </div>
   );
 }

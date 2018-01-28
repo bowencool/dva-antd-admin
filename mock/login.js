@@ -1,12 +1,32 @@
 import { API_PREFIX } from '../src/utils/constant'
 const USERS_MAP = {
   'admin': {
-    role: 'admin',
+    roles: ['admin'],
     password: 'admin',
   },
   'guest': {
-    role: 'guest',
+    roles: ['guest'],
     password: 'guest',
+  },
+  'pm': {
+    roles: ['pm'],
+    password: 'pm',
+  },
+  'ui': {
+    roles: ['ui'],
+    password: 'ui',
+  },
+  'dev': {
+    roles: ['dev'],
+    password: 'dev',
+  },
+  'qa': {
+    roles: ['qa'],
+    password: 'qa',
+  },
+  'bowen': {
+    roles: ['dev', 'ui'],
+    password: 'bowen',
   },
 }
 export default {
@@ -16,7 +36,7 @@ export default {
       console.log(USERS_MAP[username]);
       res.json({
         code: 1,
-        data: { role: USERS_MAP[username].role, token: 'tttttt' },
+        data: { roles: USERS_MAP[username].roles, token: 'tttttt' },
         message: 'ok'
       })
     } else {

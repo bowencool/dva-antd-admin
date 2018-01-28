@@ -3,7 +3,7 @@ import React from 'react';
 function NotAllowed() {
   return (
     <div>
-      Route Component: 403 NotAllowed !
+      你没有访问权限!
     </div>
   );
 }
