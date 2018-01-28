@@ -3,7 +3,6 @@ import React from 'react';
 import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
 import { DashBoard, List, Nav21, Nav22, Protected } from "../routes";
-// import RouteWithSubRoutes from './RouteWithSubRoutes'
 
 const { Item: MenuItem, SubMenu } = Menu
 // 仅包含LayoutContent(或菜单)路由, 不含Content内部嵌套
@@ -18,8 +17,8 @@ const routesAndMenus = [
   },
   {
     // path: '/menu1',
-    component: Protected,
-    title: '主菜单1', // 有子路由的会渲染成SubMenu
+    // component: Protected,
+    title: '主菜单1',
     subRoutes: [
       {
         path: '/list',
@@ -33,19 +32,22 @@ const routesAndMenus = [
         title: '递归嵌套',
         subRoutes: [
           {
-            path: '/nav2/1',
+            path: '/nav21',
             component: Nav21,
+            title: 'nav21',
             exact: true,
           },
           {
-            path: '/nav2/2',
-            component: Nav22,
-            exact: true,
-          },
-          {
-            path: '/nav2/3',
+            path: '/nav2protected',
             component: Protected,
             roles: ['admin'],
+            title: '需要权限',
+            exact: true,
+          },
+          {
+            path: '/nav22',
+            component: Nav22,
+            title: 'nav22',
             exact: true,
           },
         ],

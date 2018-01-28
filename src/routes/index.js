@@ -6,6 +6,6 @@ function importAll(r) {
   })
 }
 
-importAll(require.context('./', false, /[A-Z]\w*\.js$/))
-
+importAll(require.context('', false, /[A-Z]\w*\.js$/))
+// console.log(ALL_ROUTES);
 export default ALL_ROUTES
