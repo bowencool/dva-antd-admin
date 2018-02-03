@@ -1,12 +1,12 @@
-import Cookies from 'js-cookie';
 import { routerRedux } from 'dva/router';
+import { getItem, setItem, removeItem } from '../utils/cookie';
 import { login } from '../services/login';
 
 export default {
   namespace: 'login',
   state: {
-    roles: JSON.parse(Cookies.get('roles')),
-    token: Cookies.get('token'),
+    roles: JSON.parse(getItem('roles')),
+    token: getItem('token'),
   },
   reducers: {
     save(state, { payload }) {
@@ -20,13 +20,13 @@ export default {
     *login({ payload }, { call, put }) {
       const res = yield call(login, payload)
       yield put({ type: 'save', payload: res })
-      Cookies.set('roles', res.roles)
-      Cookies.set('token', res.token)
+      setItem('roles', JSON.stringify(res.roles))
+      setItem('token', res.token)
       yield put(routerRedux.push('/dashboard'))
     },
     *logout(action, { put }) {
-      Cookies.remove('roles')
-      Cookies.remove('token')
+      removeItem('roles')
+      removeItem('token')
       yield put({ type: 'clear' })
       yield put(routerRedux.push('/login'))
     }
