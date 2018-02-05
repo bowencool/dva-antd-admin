@@ -1,10 +1,11 @@
-import MainLayout from "./MainLayout.js";
-import Login from "./Login.js";
-import NotFound from "./NotFound.js";
-import NotAllowed from "./NotAllowed.js";
-import DashBoard from "./DashBoard.js";
-import List from "./List.js";
+const ALL_ROUTES = {}
 
-export default {
-  Login, MainLayout, DashBoard, List, NotFound, NotAllowed
+function importAll(r) {
+  r.keys().forEach((key) => {
+    ALL_ROUTES[key.match(/^\.\/([A-Z]\w*)\.js$/)[1]] = r(key)
+  })
 }
+
+importAll(require.context('', false, /[A-Z]\w*\.js$/))
+// console.log(ALL_ROUTES);
+export default ALL_ROUTES

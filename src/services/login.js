@@ -5,6 +5,6 @@ export function login(data) {
   // return request(`${API_PREFIX}/login`, {
   return request('/login', {
     method: 'POST',
-    body: JSON.stringify(data)
+    body: JSON.stringify(data) // todo 提取stringify
   });
 }
