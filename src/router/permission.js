@@ -8,6 +8,7 @@ import CONFIG from './config';
 const { Item: MenuItem, SubMenu } = Menu
 
 export const hasPermission = (userRoles, routeRoles) => {
+  // if (!userRoles) return false todo
   if (!routeRoles || userRoles.includes('admin')) return true
   for (const role of userRoles) {
     if (routeRoles.includes(role)) return true

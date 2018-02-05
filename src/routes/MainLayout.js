@@ -16,6 +16,7 @@ class MainLayout extends React.Component {
   componentWillMount() {
     const { login, dispatch } = this.props
     if (!login.token) {
+      // todo 初次没有跳转
       dispatch(routerRedux.push('/login'))
     }
   }

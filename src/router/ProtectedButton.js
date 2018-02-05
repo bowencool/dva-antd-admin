@@ -3,7 +3,8 @@ import { connect } from 'dva';
 import { Button } from 'antd';
 import { hasPermission } from './permission';
 
-const ProtectedButton = ({ userRoles, roles, children, ...rest }) => {
+/* eslint-disable no-unused-vars */
+const ProtectedButton = ({ userRoles, roles, children, dispatch, ...rest }) => {
   return hasPermission(userRoles, roles) ?
     <Button {...rest}>{children}</Button> :
     null

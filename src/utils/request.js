@@ -32,7 +32,10 @@ export default function request(url, options) {
    * Do something before send.
    */
   return fetch(BASE_API + API_PREFIX + url, {
-    headers: { 'Content-type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Token': window.store.token,
+    },
     ...options,
   })
     .then(checkStatus)
