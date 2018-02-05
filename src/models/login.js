@@ -1,13 +1,16 @@
 import { routerRedux } from 'dva/router';
-import { getItem, setItem, removeItem } from '../utils/cookie';
+import Cookie from '../utils/cookie';
 import { login } from '../services/login';
+
+const cookieCachedState = {
+  roles: JSON.parse(Cookie.getItem('roles')),
+  token: Cookie.getItem('token'),
+}
+window.store = { ...window.store, ...cookieCachedState }
 
 export default {
   namespace: 'login',
-  state: {
-    roles: JSON.parse(getItem('roles')),
-    token: getItem('token'),
-  },
+  state: cookieCachedState,
   reducers: {
     save(state, { payload }) {
       return { ...state, ...payload };
@@ -18,15 +21,17 @@ export default {
   },
   effects: {
     *login({ payload }, { call, put }) {
-      const res = yield call(login, payload)
-      yield put({ type: 'save', payload: res })
-      setItem('roles', JSON.stringify(res.roles))
-      setItem('token', res.token)
+      const { roles, token } = yield call(login, payload)
+      yield put({ type: 'save', payload: { roles, token } })
+      Cookie.setItem('roles', JSON.stringify(roles))
+      Cookie.setItem('token', token)
+      window.store = { ...window.store, roles, token }
       yield put(routerRedux.push('/dashboard'))
     },
     *logout(action, { put }) {
-      removeItem('roles')
-      removeItem('token')
+      Cookie.removeItem('roles')
+      Cookie.removeItem('token')
+      window.store = { ...window.store, roles: null, token: null }
       yield put({ type: 'clear' })
       yield put(routerRedux.push('/login'))
     }

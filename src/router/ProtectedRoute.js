@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import { NotAllowed } from '../routes';
 
 export const hasPermission = (userRoles, routeRoles) => {
-  if (userRoles.includes('admin') || routeRoles === undefined) return true
+  if (!routeRoles || userRoles.includes('admin')) return true
   for (const role of userRoles) {
     if (routeRoles.includes(role)) return true
   }
