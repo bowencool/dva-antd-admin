@@ -13,10 +13,10 @@ class MainLayout extends React.Component {
     mode: 'inline',
     theme: 'dark',
   };
-  componentWillMount() {
+  componentDidMount() {
     const { login, dispatch } = this.props
     if (!login.token) {
-      // todo 初次没有跳转
+      // console.log('go login', login.token);
       dispatch(routerRedux.push('/login'))
     }
   }

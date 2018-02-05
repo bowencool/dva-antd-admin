@@ -5,9 +5,11 @@ import { routerRedux } from 'dva/router';
 
 const FormItem = Form.Item
 class Login extends React.Component {
-  componentWillMount() {
-    if (this.props.login.token) {
-      this.props.dispatch(routerRedux.push('/dashboard'))
+  componentDidMount() {
+    const { login, dispatch } = this.props
+    if (login.token) {
+      // console.log('go dashboard', login.token);
+      dispatch(routerRedux.push('/dashboard'))
     }
   }
   handleSubmit = (e) => {
