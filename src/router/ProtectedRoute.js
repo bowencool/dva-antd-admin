@@ -2,14 +2,7 @@ import React from 'react';
 import { Route } from 'dva/router';
 import { connect } from 'dva';
 import { NotAllowed } from '../routes';
-
-export const hasPermission = (userRoles, routeRoles) => {
-  if (!routeRoles || userRoles.includes('admin')) return true
-  for (const role of userRoles) {
-    if (routeRoles.includes(role)) return true
-  }
-  return false
-}
+import { hasPermission } from './permission';
 
 const ProtectedRoute = ({ userRoles, routeRoles, ...rest }) => {
   return (<div>

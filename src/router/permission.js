@@ -2,10 +2,18 @@ import React from 'react';
 // import { connect } from 'dva';
 import { Route, Switch, Redirect, Link } from 'dva/router';
 import { Menu, Icon } from 'antd';
-import ProtectedRoute, { hasPermission } from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 import CONFIG from './config';
 
 const { Item: MenuItem, SubMenu } = Menu
+
+export const hasPermission = (userRoles, routeRoles) => {
+  if (!routeRoles || userRoles.includes('admin')) return true
+  for (const role of userRoles) {
+    if (routeRoles.includes(role)) return true
+  }
+  return false
+}
 
 function LayoutContentRoutes() {
   const routes = []

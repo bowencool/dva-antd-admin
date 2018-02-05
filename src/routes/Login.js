@@ -48,6 +48,7 @@ class Login extends React.Component {
             >Log in</Button>
           </FormItem>
         </Form>
+        <p>可选账号admin, guest, pm, ui, dev, qa, bowen, 密码和账号一样</p>
       </div>
     );
   }
