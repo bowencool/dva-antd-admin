@@ -7,13 +7,10 @@ import CONFIG from './config';
 
 const { Item: MenuItem, SubMenu } = Menu
 
-export const hasPermission = (userRoles, routeRoles) => {
+export const hasPermission = (userRoles, allowedRoles) => {
   if (!userRoles) return false
-  if (!routeRoles || userRoles.includes('admin')) return true
-  for (const role of userRoles) {
-    if (routeRoles.includes(role)) return true
-  }
-  return false
+  if (!allowedRoles || userRoles.includes('admin')) return true
+  return userRoles.some(role => allowedRoles.includes(role))
 }
 
 function LayoutContentRoutes() {
