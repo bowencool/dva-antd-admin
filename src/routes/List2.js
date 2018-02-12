@@ -12,12 +12,10 @@ class List extends React.Component {
   columns = [
     {
       title: '用户名',
-      key: 'account',
       dataIndex: 'account',
     },
     {
       title: '角色/权限',
-      key: 'roles',
       dataIndex: 'roles',
       render: roles => <div>{roles.map(role =>
         <Tag key={role} color="blue">{role}</Tag>
@@ -25,17 +23,21 @@ class List extends React.Component {
     },
     {
       title: "操作",
-      key: 'action',
-      dataIndex: 'action',
-      render: (text, row) => <Link to={`/list2/${row.account}`}>详情</Link>
+      // key: 'action',
+      render: (text, record) => <Link to={`/list2/${record.account}`}>详情</Link>
     }
   ]
   render() {
     const { list } = this.props
     return (
-      <div>
-        <Table columns={this.columns} dataSource={list} bordered size="small" pagination={false} />
-      </div>
+      <Table
+        columns={this.columns}
+        dataSource={list}
+        bordered
+        size="small"
+        pagination={false}
+        rowKey={record => record.account}
+      />
     );
   }
 }
