@@ -37,6 +37,7 @@ class List extends React.Component {
       <div>
         <Table columns={this.columns} dataSource={list} bordered size="small" pagination={false} />
         <Route path="/list/:account" component={Detail} />
+        {/* <Route path="/list/:account" render={(props) => <Detail {...props} />} /> */}
       </div>
     );
   }
