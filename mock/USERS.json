@@ -1,0 +1,52 @@
+[
+  {
+    "account": "admin",
+    "roles": [
+      "admin"
+    ],
+    "password": "admin"
+  },
+  {
+    "account": "guest",
+    "roles": [
+      "guest"
+    ],
+    "password": "guest"
+  },
+  {
+    "account": "pm",
+    "roles": [
+      "pm"
+    ],
+    "password": "pm"
+  },
+  {
+    "account": "ui",
+    "roles": [
+      "ui"
+    ],
+    "password": "ui"
+  },
+  {
+    "account": "dev",
+    "roles": [
+      "dev"
+    ],
+    "password": "dev"
+  },
+  {
+    "account": "qa",
+    "roles": [
+      "qa"
+    ],
+    "password": "qa"
+  },
+  {
+    "account": "bowen",
+    "roles": [
+      "dev",
+      "ui"
+    ],
+    "password": "bowen"
+  }
+]

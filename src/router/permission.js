@@ -62,7 +62,7 @@ const route2Menu = ({ path, redirect, subRoutes = [], title, roles, icon = "ques
 }
 
 export const Menus = ({ theme, mode, selectedKeys }) => (
-  <Menu theme={theme} mode={mode} selectedKeys={selectedKeys}>
+  <Menu theme={theme} mode={mode} defaultSelectedKeys={selectedKeys}>
     {CONFIG.map(route2Menu)}
   </Menu>
 )
