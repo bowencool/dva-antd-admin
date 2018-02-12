@@ -5,7 +5,7 @@ import { Layout, Icon } from 'antd';
 import { Menus } from '../router/permission'
 import './MainLayout.less';
 
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Sider, Content } = Layout
 
 class MainLayout extends React.Component {
   state = {
@@ -54,8 +54,7 @@ class MainLayout extends React.Component {
               onClick={() => dispatch({ type: 'login/logout' })}
             />
           </Header>
-          <Content>{children}</Content>
-          <Footer>Footer</Footer>
+          <Content style={{ padding: "20px" }}>{children}</Content>
         </Layout>
       </Layout>
     );

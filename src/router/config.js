@@ -1,6 +1,6 @@
 // 仅用于生成菜单及相关路由, 不含Content内部嵌套
-import React from 'react';
 import { NotFound, DashBoard, List, List2, Ordinary, Protected } from "../routes";
+import Detail from '../components/Detail'
 
 export default [
   {
@@ -30,8 +30,8 @@ export default [
         exact: true,
       },
       {
-        path: '/list2/:id(\\d+)',
-        render: ({ match }) => <div>detail: {match.params.id}</div>,
+        path: '/list2/:account',
+        component: Detail,
       },
       {
         path: '/nav2',
