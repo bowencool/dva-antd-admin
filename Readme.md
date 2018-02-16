@@ -1,5 +1,6 @@
 # dva-antd-admin
 > 使用[dva-cli](https://github.com/dvajs/dva)搭起的架子，`菜单` `路由` `权限`三者耦合的案例。
+> 效果：![permission](./src/assets/permission.gif)
 ## Todo
 - [x] 从`路由配置`生成可访问菜单和路由
 - [x] `ProtectedRoute`，需要验证权限的路由，权限不符合则渲染`NotAllowed`
