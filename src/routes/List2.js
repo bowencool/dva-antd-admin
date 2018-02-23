@@ -24,7 +24,7 @@ class List extends React.Component {
     {
       title: "操作",
       // key: 'action',
-      render: (text, record) => <Link to={`/list2/${record.account}`}>详情</Link>
+      render: (text, record) => <Link to={`${this.props.match.path}/${record.account}`}>详情</Link>
     }
   ]
   render() {

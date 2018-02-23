@@ -29,7 +29,7 @@ class List extends React.Component {
     }
   ]
   render() {
-    const { list } = this.props
+    const { list, match: { path } } = this.props
     return (
       <div>
         <Table
@@ -40,7 +40,7 @@ class List extends React.Component {
           pagination={false}
           rowKey={record => record.account}
         />
-        <Route path="/list/:account" component={Detail} />
+        <Route path={`${path}/:account`} component={Detail} />
       </div>
     );
   }
