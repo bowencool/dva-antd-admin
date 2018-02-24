@@ -1,5 +1,5 @@
 // 仅用于生成菜单及相关路由, 不含Content内部嵌套
-import { NotFound, DashBoard, List, List2, Ordinary, Protected } from "../routes";
+import { NotFound, DashBoard, List, List2, Ordinary, ChartsEG, Protected } from "../routes";
 import Detail from '../components/Detail'
 
 export default [
@@ -69,6 +69,12 @@ export default [
     icon: 'lock',
     roles: ['dev'],
     component: Protected,
+  },
+  {
+    path: '/charts',
+    title: '图表',
+    icon: 'area-chart',
+    component: ChartsEG,
   },
   {
     path: '/qaui',

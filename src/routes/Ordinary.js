@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'dva/router'
+import { withRouter } from 'dva/router';
 
 function Ordinary({ location: { pathname } }) {
   return (
