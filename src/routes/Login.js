@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button } from 'antd';
 import { routerRedux } from 'dva/router';
+import './Login.less';
 
 const FormItem = Form.Item
 class Login extends React.Component {
@@ -26,7 +27,19 @@ class Login extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form
     return (
-      <div className="flex column jc-center ai-center">
+      <div className="flex column jc-center ai-center h100p">
+        <ul className="bg-bubbles">
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
         <h2>Log in</h2>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
@@ -50,7 +63,7 @@ class Login extends React.Component {
             >Log in</Button>
           </FormItem>
         </Form>
-        <p>可选账号admin, guest, pm, ui, dev, qa, bowen, 密码和账号一样</p>
+        <p>可选账号admin, guest, pm, ui, dev, qa, bowen密码和账号一样</p>
       </div>
     );
   }
