@@ -11,15 +11,12 @@ class Detail extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.fetch()
-    // wtf 执行了无数次，router leave的时候也执行。。。
-    // this.props.history.listen(this.fetch)
-    // this.props.history.listen(() => { setTimeout(this.fetch, 0) })
+  componentWillReceiveProps({ match: { params: { account } } }) {
+    // account !== this.props.match.params.account &&
+    this.fetch(account);
   }
 
-  fetch = () => {
-    const { match: { params: { account } } } = this.props
+  fetch = (account = this.props.match.params.account) => {
     getDetail(account)
       .then((detail) => {
         this.setState({ detail })
