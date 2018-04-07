@@ -40,10 +40,10 @@ class Login extends React.Component {
           <li />
           <li />
         </ul>
-        <h2>Log in</h2>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('username', {
+              initialValue: 'admin',
               rules: [{ required: true, message: 'Please input your username!' }]
             })(
               <Input placeholder="username" />
@@ -51,6 +51,7 @@ class Login extends React.Component {
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
+              initialValue: 'admin',
               rules: [{ required: true, message: 'Please input your password!' }]
             })(
               <Input type="password" placeholder="password" />
@@ -60,10 +61,9 @@ class Login extends React.Component {
             <Button
               type="primary"
               htmlType="submit"
-            >Log in</Button>
+            >登陆</Button>
           </FormItem>
         </Form>
-        <p>可选账号admin, guest, pm, ui, dev, qa, bowen密码和账号一样</p>
       </div>
     );
   }
